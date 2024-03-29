@@ -1,0 +1,10 @@
+numpy
+matplotlib
+scikit-learn
+scipy
+ipykernel
+cython
+--extra-index-url https://pypi.nvidia.com tensorrt-bindings==8.6.1 tensorrt-libs==8.6.1
+tensorflow[and-cuda]==2.15.0
+tensorflow_datasets
+libmr
