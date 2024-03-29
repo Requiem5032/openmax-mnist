@@ -42,7 +42,8 @@ def get_train_test():
     x_train = x_train.astype('float32')
     x_test = x_test.astype('float32')
 
-    x_train, x_test = x_train / 255., x_test / 255.
+    x_train /= 255.
+    x_test /= 255.
 
     x_train = x_train.reshape(-1, IMG_DIM, IMG_DIM, 1)
     x_test = x_test.reshape(-1, IMG_DIM, IMG_DIM, 1)
@@ -54,7 +55,8 @@ def get_train_test_fashion():
     x_train = x_train.astype('float32')
     x_test = x_test.astype('float32')
 
-    x_train, x_test = x_train / 255., x_test / 255.
+    x_train /= 255.
+    x_test /= 255.
 
     x_train = x_train.reshape(-1, IMG_DIM, IMG_DIM, 1)
     x_test = x_test.reshape(-1, IMG_DIM, IMG_DIM, 1)
