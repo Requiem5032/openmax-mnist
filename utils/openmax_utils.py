@@ -81,7 +81,7 @@ def get_eval_data(include_train=False):
     return x_all, y_all
 
 
-def get_openmax_predict(openmax, threshold=0.0001):
+def get_openmax_predict(openmax, threshold=0.0003):
     if openmax[10] >= threshold:
         res = 10
     else:
