@@ -19,10 +19,10 @@ def create_model(model, data):
     x_all = np.concatenate((x_train, x_test), axis=0)
     y_all = np.concatenate((y_train, y_test), axis=0)
 
-    logits_outputs, softmax_outputs = get_activations(x_all, model)
-    correct_index = get_correct_classified(softmax_outputs, y_all)
+    logits_output, softmax_output = get_activations(x_all, model)
+    correct_index = get_correct_classified(softmax_output, y_all)
 
-    logits_correct = logits_outputs[correct_index]
+    logits_correct = logits_output[correct_index]
     y_correct = y_all[correct_index]
 
     av_map = {}

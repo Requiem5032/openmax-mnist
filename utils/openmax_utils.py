@@ -104,8 +104,8 @@ def get_activations(x, model):
             model.get_layer('softmax').output,
         ],
     )
-    logits_outputs, softmax_outputs = partial_model.predict(x)
-    return logits_outputs, softmax_outputs
+    logits_output, softmax_output = partial_model.predict(x)
+    return logits_output, softmax_output
 
 
 def get_correct_classified(prob, y):
