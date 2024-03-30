@@ -91,7 +91,7 @@ def recalibrate_scores(weibull_model, labels, activation_vector, alpharank=ALPHA
 
     openmax_probab, prob_u = computeOpenMaxProbability(
         openmax_scores, openmax_scores_u)
-    return np.array(openmax_probab), np.array(prob_u)
+    return openmax_probab, prob_u
 
 
 def computeOpenMaxProbability(openmax_scores, openmax_scores_u):
@@ -101,7 +101,7 @@ def computeOpenMaxProbability(openmax_scores, openmax_scores_u):
     total_denominator = np.sum(openmax_arr)
     prob_k = e_k / total_denominator
     prob_u = e_u / total_denominator
-    res = prob_k.tolist() + [prob_u]
+    res = np.concatenate((prob_k, prob_u), axis=None)
     return res, prob_u
 
 
