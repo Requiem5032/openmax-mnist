@@ -15,15 +15,13 @@ labels = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 
 def create_model(model, data):
-    x_train, x_test, y_train, y_test = data
-    x_all = np.concatenate((x_train, x_test), axis=0)
-    y_all = np.concatenate((y_train, y_test), axis=0)
+    (x_train, y_train) = data
 
-    logits_output, softmax_output = get_activations(x_all, model)
-    correct_index = get_correct_classified(softmax_output, y_all)
+    logits_output, softmax_output = get_activations(x_train, model)
+    correct_index = get_correct_classified(softmax_output, y_train)
 
     logits_correct = logits_output[correct_index]
-    y_correct = y_all[correct_index]
+    y_correct = y_train[correct_index]
 
     av_map = {}
 

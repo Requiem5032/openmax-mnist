@@ -4,9 +4,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from sklearn.metrics import roc_curve, roc_auc_score, precision_recall_curve, average_precision_score
-from tensorflow.keras.datasets import mnist, fashion_mnist
-
-IMG_DIM = 28
 
 
 def compute_mean_vector(feature):
@@ -37,51 +34,7 @@ def compute_distance_dict(mean_feature, feature):
     return distances
 
 
-def get_train_test():
-    (x_train, y_train), (x_test, y_test) = mnist.load_data()
-    x_train = x_train.astype('float32')
-    x_test = x_test.astype('float32')
-
-    x_train /= 255.
-    x_test /= 255.
-
-    x_train = x_train.reshape(-1, IMG_DIM, IMG_DIM, 1)
-    x_test = x_test.reshape(-1, IMG_DIM, IMG_DIM, 1)
-    return x_train, x_test, y_train, y_test
-
-
-def get_train_test_fashion():
-    (x_train, y_train), (x_test, y_test) = fashion_mnist.load_data()
-    x_train = x_train.astype('float32')
-    x_test = x_test.astype('float32')
-
-    x_train /= 255.
-    x_test /= 255.
-
-    x_train = x_train.reshape(-1, IMG_DIM, IMG_DIM, 1)
-    x_test = x_test.reshape(-1, IMG_DIM, IMG_DIM, 1)
-    return x_train, x_test, y_train, y_test
-
-
-def get_eval_data(include_train=False):
-    x_known_train, x_known_test, y_known_train, y_known_test = get_train_test()
-    x_unknown_train, x_unknown_test, y_unknown_train, y_unknown_test = get_train_test_fashion()
-
-    y_unknown_train = np.full(y_unknown_train.shape, 10)
-    y_unknown_test = np.full(y_unknown_test.shape, 10)
-
-    if include_train:
-        x_all = np.concatenate(
-            (x_known_train, x_known_test, x_unknown_train, x_unknown_test), axis=0)
-        y_all = np.concatenate(
-            (y_known_train, y_known_test, y_unknown_train, y_unknown_test), axis=0)
-    else:
-        x_all = np.concatenate((x_known_test, x_unknown_test), axis=0)
-        y_all = np.concatenate((y_known_test, y_unknown_test), axis=0)
-    return x_all, y_all
-
-
-def get_openmax_predict(openmax, threshold=0.0003):
+def get_openmax_predict(openmax, threshold=0.0004):
     if openmax[10] >= threshold:
         res = 10
     else:
