@@ -15,9 +15,9 @@ labels = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 
 def create_model(model, data):
-    (x_train, y_train) = data
+    _, y_train = data.get_all()
 
-    logits_output, softmax_output = get_activations(x_train, model)
+    logits_output, softmax_output = get_activations(data, model)
     correct_index = get_correct_classified(softmax_output, y_train)
 
     logits_correct = logits_output[correct_index]
@@ -87,12 +87,12 @@ def recalibrate_scores(weibull_model, labels, activation_vector, alpharank=ALPHA
     # print(f'openmax_scores: {openmax_scores}')
     # print(f'openmax_scores_u: {np.sum(openmax_scores_u)}')
 
-    openmax_probab, prob_u = computeOpenMaxProbability(
+    openmax_probab, prob_u = compute_openmax_probability(
         openmax_scores, openmax_scores_u)
     return openmax_probab, prob_u
 
 
-def computeOpenMaxProbability(openmax_scores, openmax_scores_u):
+def compute_openmax_probability(openmax_scores, openmax_scores_u):
     e_k = np.exp(openmax_scores)
     e_u = np.exp(np.sum(openmax_scores_u))
     openmax_arr = np.concatenate((e_k, e_u), axis=None)
